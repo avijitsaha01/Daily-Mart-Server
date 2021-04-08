@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express();
 const MongoClient = require('mongodb').MongoClient;
+const ObjectID = require('mongodb').ObjectID;
 const cors = require('cors');
 const bodyParser = require('body-parser');
 require('dotenv').config()
@@ -32,15 +33,14 @@ client.connect(err => {
                 res.send(result.insertedCount > 0)
             })
     })
+
+    app.delete('/deleteProduct:id', (req, res)=>{
+        const id = ObjectID(req.params.id)
+    })
 });
 
 
 
-
-
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-})
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
