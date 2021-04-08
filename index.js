@@ -36,10 +36,13 @@ client.connect(err => {
 
     app.delete('/deleteProduct:id', (req, res)=>{
         const id = ObjectID(req.params.id)
+        console.log(id)
+        productCollection.findOneAndDelete({_id: id})
+        .then(result => {
+            res.send(result.deletedCount > 0);
+          })
     })
 });
-
-
 
 
 app.listen(port, () => {
